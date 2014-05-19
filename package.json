@@ -1,0 +1,24 @@
+{
+  "name": "msite",
+  "version": "0.0.0",
+  "description": "The faster way built your website with node.js",
+  "main": "app.js",
+  "dependencies": {
+    "jade": "^1.3.1"
+  },
+  "keywords": [
+    "website",
+    "nodejs"
+  ],
+  "author": {
+    "name": "ZMofei",
+    "email": "13761509829@163.com"
+  },
+  "engines": {
+    "node": ">= 0.10.26"
+  },
+  "readme": "mSite\n=====\n\nmBlog is rename to mSite\n\nThe faster way built your website with node.js\n\n```javascript\nvar app = require('msite');\n\napp.start('9999');\n```\n\n\nStatic files\n=====\n\nall the static files (*.*) are in the folder `/static`\n\neg: `127.0.0.1:9999/test.js` => `/static/test.js`\n\n\n#### MIME\nthe default MIME is:\n\n``` javascript\nMIME = {\n  'css' : 'text/css',\n  'js' : 'text/javascript',\n  'gif' : 'image/gif',\n  'jpg' : 'image/jpeg',\n  'png' : 'image/png',\n  'ico' : 'image/x-icon',\n  'html' : 'text/html',\n  'htm' : 'text/html',\n  'txt' : 'text/plain',\n  'mp4' : 'video/mp4'\n};\n```\n\nif you want add or remove some MIME,you can simple use:\n\nadd .exe file support\n`app.mime.add({\"exe\":\"plan/application\"})`\n\nremove .css file support\n`app.mime.remove(\"css\")`  \n\nremove .css and .javascript file support\n`app.mime.remove(\"css,javascript\")`  \n\nDynamic url\n=====\n\nif access a dynamic url (not end with *.*);\n\nfor example,if you visite a url `name.com/abc/dd`\n\nmsite first try to read `/abc/dd.js` file,if the file is exists , run this file,if it's not exists,msite will try to read `/abc/dd.jade`,if it's also not exists ,msite will try to put dd as a folder and try to readen `/abc/dd/index.js` | `/abc/dd/index.jade`,if msite sitll got nothing,it return 404\n\n\n> `name.com/abc/dd` => `/abc/dd.js` | `/abc/dd.jade`\n\n> `name.com/abc/dd` => `/abc/dd/index.js` | `/abc/dd/index.jade`\n\n##HTML Templpate\n\nIn msite we use Jade to readen html,it's easy and simple\n\n[Jade language Reference](http://jade-lang.com/reference/#casefallthrough)\n\nyou also can use jade's layout to finish you pages\n\n\n##Router Rules\n\n### get(RegExp,folder)\nsometimes we don't want visit as a filesystem.\nfor example you want the following address\n`name.com/blog/1235`\nto readen\n`/blog/index.jade` and the model `/blog/index.js`\nin this case you can use the method `get`\n\n`name.com/blog/1235` => `/blog/index.jade` & `/blog/index.js`\n\n```javascript\nvar app = require('msite');\n\n//the router\napp.get(/\\/blog\\/(\\d{4})$/, 'blog');\n//if the url match the /\\/blog\\/(\\d{4})$/,\n//msite will try to readen the index.jade and index.js in folder /blog\n\napp.start('9999');\n```\n\n### get(RegExp,files#)\n\nand in outher case, we didn't what to readen `index.jade` and `index.js`,say we want to readen `/blog/list.jade` and `/blog/list.js` , you can use \"#\".\n\n`name.com/blog/asd2asd2asd2asd2asd2asd2` => `blog/list.jade` & `blog/list.js`\n\n```javascript\nvar app = require('msite');\n\n//the router\napp.get(/\\/blog\\/(\\w{24})$/, 'blog/list#');\n//if the url match the /\\/blog\\/(\\d{24})$/,\n//msite will try to readen the list.jad and list.js in folder /blog\n\napp.start('9999');\n\n```\n",
+  "readmeFilename": "README.md",
+  "_id": "msite@0.0.0",
+  "_from": "msite@^0.0.0"
+}
