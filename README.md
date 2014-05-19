@@ -5,6 +5,17 @@ mBlog is rename to mSite
 
 The faster way built your website with node.js
 
+
+Installation
+=====
+
+```
+$ npm install msite
+```
+
+Usage
+=====
+
 ```javascript
 var app = require('msite');
 
@@ -112,3 +123,8 @@ app.get(/\/blog\/(\w{24})$/, 'blog/list#');
 app.start('9999');
 
 ```
+
+License
+=====
+
+MIT
