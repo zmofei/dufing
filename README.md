@@ -22,7 +22,6 @@ var app = require('msite');
 app.start('9999');
 ```
 
-
 Static files
 =====
 
@@ -123,6 +122,26 @@ app.get(/\/blog\/(\w{24})$/, 'blog/list#');
 app.start('9999');
 
 ```
+
+##Alias
+
+you can simple use `.alias(aliasName,aliasFolder)` add a alias.
+
+lat's say if your domain is `zhuwenlong.com`,and you want add a alias `msite.zhuwenlong.com`,you can write like this:
+
+```javascript
+var app = require('msite');
+
+//add alias msite
+app.alias('msite','/msite');
+//add alias test
+app.alias('test');
+
+app.start('9999');
+```
+
+in `.alias(aliasName,aliasFolder)` you can assign the alias's floder,or the sys will use '/'+aliasFolder as a default alias folder
+
 
 License
 =====
