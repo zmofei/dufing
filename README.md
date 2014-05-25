@@ -105,23 +105,6 @@ app.get(/\/blog\/(\d{4})$/, 'blog');
 app.start('9999');
 ```
 
-### get(RegExp,files#)
-
-and in outher case, we didn't what to readen `index.jade` and `index.js`,say we want to readen `/blog/list.jade` and `/blog/list.js` , you can use "#".
-
-`name.com/blog/asd2asd2asd2asd2asd2asd2` => `blog/list.jade` & `blog/list.js`
-
-```javascript
-var app = require('msite');
-
-//the router
-app.get(/\/blog\/(\w{24})$/, 'blog/list#');
-//if the url match the /\/blog\/(\d{24})$/,
-//msite will try to readen the list.jad and list.js in folder /blog
-
-app.start('9999');
-
-```
 
 ##Alias
 
