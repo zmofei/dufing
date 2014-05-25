@@ -86,7 +86,12 @@ you also can use jade's layout to finish you pages
 
 ##Router Rules
 
-### get(RegExp,folder)
+### get(RegExp,folder,option)
+
+* RegExp the ruler of your path
+* floder the floder witch the file is 
+* option.mime the default mime of dynamic is 'text/html', sometime we want change the mime, say if you setup a path 'xxx.com/rss',you want this url return 'application/rss+xml',you can use option.mime
+
 sometimes we don't want visit as a filesystem.
 for example you want the following address
 `name.com/blog/1235`
@@ -105,6 +110,11 @@ app.get(/\/blog\/(\d{4})$/, 'blog');
 //msite will try to readen the index.jade and index.js in folder /blog
 
 app.start('9999');
+```
+
+get with mime
+```javascript
+app.get(/\/rss$/, 'rss',{mime:'application/rss+xml'});
 ```
 
 
