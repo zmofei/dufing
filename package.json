@@ -1,6 +1,6 @@
 {
   "name": "msite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The faster way built your website with node.js",
   "main": "app.js",
   "dependencies": {
