@@ -1,0 +1,19 @@
+const http = require('http');
+const process = require('process');
+
+var url = require('url');
+
+function server(port){
+    http.createServer((request, response) => {
+        var reqUrl = url.parse(request.url);
+        var path = reqUrl.pathname;
+        console.log(path)
+        console.log(process.cwd());
+        response.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+        response.end('Welcome to mSite\n');
+    }).listen(port);
+}
+
+module.exports = server;

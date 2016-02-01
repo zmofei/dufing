@@ -1,0 +1,26 @@
+{
+  "name": "dufing",
+  "version": "1.0.0",
+  "description": "The folder based webserver for node",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmofei/dufing.git"
+  },
+  "keywords": [
+    "webserver",
+    "node.js"
+  ],
+  "author": "Mofei Zhu <13761509829@163.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmofei/dufing/issues"
+  },
+  "homepage": "https://github.com/zmofei/dufing#readme"
+}
