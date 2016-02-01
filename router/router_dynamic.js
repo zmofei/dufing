@@ -3,12 +3,66 @@
 const httpResponse = require('../http/http_response');
 const fs = require('fs');
 const path = require('path');
-const staticBase = 'static';
+const rootBase = 'root';
+
+let routerCache = {};
 
 function Dynamic(request, response, _path) {
-
     let appPath = path.join(process.mainModule.filename, '..');
-    let filePath = path.join(appPath, staticBase, _path);
+    var filePath = path.join(appPath, rootBase, _path);
+    console.log('DDDD',filePath)
+
+    // let appPath = path.join(process.mainModule.filename, '..');
+    // let filePath = path.join(appPath, staticBase, _path);
+
+    if (routerCache[path]) {
+
+    } else {
+        // if the path can be a file
+        if (!/\/$/.test(filePath)) {
+            // if the path not end with '\ ',
+            // that's mean it colod be a folder or file
+            // try to deal with it as file
+            filePath = path.join(filePath + '.js');
+            console.log('try path 1', filePath)
+        }
+
+        // try to deal with it as floder
+        filePath = path.join(filePath, 'index.js');
+        console.log('try path 2-',filePath);
+        // console.log('try path 2',path.join(process.cwd(), '../example/root/index.js'));
+        let page = require(filePath);
+        console.log(page)
+    }
+
+
+    response.writeHead(200, {
+        'Content-Type': 'text/plain'
+    });
+    response.end('Welcome to mSite\n');
+    return false;
+
+        // if (routerCache[path]) {
+        //
+        // } else {
+        //     //router
+        //     console.log('Origin', path.join(reqPath))
+        //     // if the path can be a file
+        //     if (!/\/$/.test(reqPath)) {
+        //         // if the path not end with '\ ',
+        //         // that's mean it colod be a folder or file
+        //         // try to deal with it as file
+        //         console.log('try path', path.join(process.cwd(), rootBase, reqPath + '.js'))
+        //     }
+        //
+        //     // try to deal with it as floder
+        //     console.log('try path', path.join(process.cwd(), rootBase, reqPath, 'index.js'))
+        //
+        //     // static
+        //     // console.log('path Three', path.join(process.cwd(), staticBase, reqPath))
+        // }
+        // console.log('path', path.join(process.cwd(), rootBase, reqPath));
+        // console.log('cwd', process.cwd());
 
     fs.stat(filePath, function(err, state) {
         if (state) {
