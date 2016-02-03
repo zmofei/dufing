@@ -1,0 +1,11 @@
+normalize.sass
+node_modules
+.sass-cache
+*~
+*.swp
+.DS_Store
+sys/
+static/upload/
+bower_components
+build
+.DS_Store
