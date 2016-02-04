@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/zmofei/dufing/issues"
   },
-  "homepage": "https://github.com/zmofei/dufing#readme"
+  "homepage": "https://github.com/zmofei/dufing#readme",
+  "dependencies": {
+    "jade": "^1.11.0"
+  }
 }
