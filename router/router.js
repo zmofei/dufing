@@ -21,7 +21,7 @@ function Router(request, response) {
         staticRouter(request, response, reqPath);
     } else {
         // if is dynamic
-        dynamicRouter(request, response, reqPath);
+        dynamicRouter.call(this, request, response, reqPath);
     }
 
 }

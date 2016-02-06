@@ -1,6 +1,7 @@
 'use strict';
 
 const httpResponse = require('../http/http_response');
+const middle = require('../middleware/middleware');
 const fs = require('fs');
 const path = require('path');
 const rootBase = 'root';
@@ -8,11 +9,18 @@ const rootBase = 'root';
 let routerCache = {};
 
 function Dynamic(request, response, _path) {
+    let self = this;
+    // console.log(_path)
     let appPath = path.join(process.mainModule.filename, '..');
     let filePath = path.join(appPath, rootBase, _path);
 
-    if (routerCache[path]) {
-
+    if (routerCache[_path]) {
+        middle.regArgs({
+            router: {
+                path: routerCache[_path].path
+            }
+        });
+        routerCache[_path].fn.call(this, request, response)
     } else {
         let paths = [];
         // if the path not end with '\ ',
@@ -27,7 +35,16 @@ function Dynamic(request, response, _path) {
         readDynamic(paths, function(_module) {
             // success
             if (typeof(_module) == 'function') {
-                _module(request, response)
+                routerCache[_path] = {
+                    'fn': _module,
+                    'path': _path
+                };
+                middle.regArgs({
+                    router: {
+                        path: _path
+                    }
+                });
+                _module.call(self, request, response)
             } else {
                 httpResponse.res404(request, response);
             }
@@ -48,7 +65,7 @@ function readDynamic(paths, success, fail) {
             if (state) {
                 // success
                 var _module = require(filePath);
-                success(_module);
+                success(_module, filePath);
             } else {
                 if (paths[++index]) {
                     getFile();

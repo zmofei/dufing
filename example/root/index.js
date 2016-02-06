@@ -1,8 +1,7 @@
 var render = function(req, res){
-    res.writeHead(200, {
-        'Content-Type': 'text/plain'
-    });
-    res.end('Welcome to mSite\n');
+    this.jade()
+    // this.jade({path:'.../', Model});
+    
 }
 
 module.exports = render;
