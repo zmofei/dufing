@@ -24,7 +24,7 @@ class Middle {
             let middle = require('./' + name + '.js');
             for (var i in middle) {
                 this[i] = function() {
-                    middle[i].call(args);
+                    middle[i].apply(args, arguments);
                 }
             }
         }

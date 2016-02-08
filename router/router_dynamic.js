@@ -32,16 +32,17 @@ function Dynamic(request, response, _path) {
         // if it file
         paths.push(path.join(filePath, 'index.js'));
 
-        readDynamic(paths, function(_module) {
+        readDynamic(paths, function(_module, filePath) {
+            // console.log(filePath)
             // success
             if (typeof(_module) == 'function') {
                 routerCache[_path] = {
                     'fn': _module,
-                    'path': _path
+                    'path': filePath
                 };
                 middle.regArgs({
                     router: {
-                        path: _path
+                        path: filePath
                     }
                 });
                 _module.call(self, request, response)

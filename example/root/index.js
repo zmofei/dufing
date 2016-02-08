@@ -1,7 +1,9 @@
-var render = function(req, res){
-    this.jade()
-    // this.jade({path:'.../', Model});
-    
+var render = function(req, res) {
+    this.jade({
+        data: {
+            title: 'abc'
+        }
+    })
 }
 
 module.exports = render;
