@@ -1,5 +1,6 @@
 'use strict';
 let mime = {
+    ".ico": "image/ico",
     ".au": "audio/basic",
     ".avi": "video/avi,",
     ".bmp": "image/bmp",
