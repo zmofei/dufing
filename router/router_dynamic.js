@@ -10,7 +10,8 @@ let routerCache = {};
 
 function Dynamic(request, response, _path) {
     let self = this;
-    // console.log(_path)
+    self.req = request;
+    self.res = response;
     let appPath = path.join(process.mainModule.filename, '..');
     let filePath = path.join(appPath, rootBase, _path);
 
@@ -20,7 +21,7 @@ function Dynamic(request, response, _path) {
                 path: routerCache[_path].path
             }
         });
-        routerCache[_path].fn.call(this, request, response)
+        routerCache[_path].fn.call(self, request, response)
     } else {
         let paths = [];
         // if the path not end with '\ ',
@@ -33,7 +34,6 @@ function Dynamic(request, response, _path) {
         paths.push(path.join(filePath, 'index.js'));
 
         readDynamic(paths, function(_module, filePath) {
-            // console.log(filePath)
             // success
             if (typeof(_module) == 'function') {
                 routerCache[_path] = {
@@ -78,7 +78,5 @@ function readDynamic(paths, success, fail) {
         });
     }
 }
-
-
 
 module.exports = Dynamic;

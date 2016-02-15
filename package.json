@@ -1,6 +1,6 @@
 {
   "name": "dufing",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "The folder based webserver for node",
   "main": "index.js",
   "directories": {
