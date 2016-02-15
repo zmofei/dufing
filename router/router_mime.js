@@ -1,6 +1,11 @@
 'use strict';
 let mime = {
-    ".ico": "image/ico",
+    ".woff": "application/x-font-woff",
+    ".ttf": "application/font-ttf",
+    ".eot": "application/vnd.ms-fontobject",
+    ".otf": "application/font-otf",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon",
     ".au": "audio/basic",
     ".avi": "video/avi,",
     ".bmp": "image/bmp",
