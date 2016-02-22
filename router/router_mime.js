@@ -1,5 +1,8 @@
 'use strict';
 let mime = {
+    ".ogv": "video/ogg",
+    ".webm": "video/webm",
+    ".mp4": "video/mp4",
     ".woff": "application/x-font-woff",
     ".ttf": "application/font-ttf",
     ".eot": "application/vnd.ms-fontobject",

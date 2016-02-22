@@ -37,7 +37,6 @@ function Static(request, response, _path) {
                     'Expires': expires,
                     'Content-Length': state.size || ''
                 };
-
                 if (request.headers.range) {
                     // Streaming Media Like mp4
                     var range = request.headers.range;
@@ -45,9 +44,9 @@ function Static(request, response, _path) {
                     var partialstart = parts[0];
                     var partialend = parts[1];
                     var start = parseInt(partialstart, 10);
-                    var end = partialend ? parseInt(partialend, 10) : stats.size - 1;
+                    var end = partialend ? parseInt(partialend, 10) : state.size - 1;
                     var chunksize = (end - start) + 1;
-                    headData['Content-Range'] = 'bytes ' + start + '-' + end + '/' + stats.size;
+                    headData['Content-Range'] = 'bytes ' + start + '-' + end + '/' + state.size;
                     headData['Accept-Ranges'] = 'bytes';
                     headData['Content-Length'] = chunksize;
                     response.writeHead(206, headData);
