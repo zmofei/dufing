@@ -13,7 +13,8 @@ function Dynamic(request, response, _path) {
     self.req = request;
     self.res = response;
     let appPath = path.join(process.mainModule.filename, '..');
-    let filePath = path.join(appPath, rootBase, _path);
+    let filePath = path.join(appPath, rootBase, _path).replace(/\?.*$/, '');
+    // console.log(filePath)
 
     if (routerCache[_path]) {
         middle.regArgs({

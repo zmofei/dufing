@@ -9,13 +9,13 @@ const staticBase = 'static';
 function Static(request, response, _path) {
 
     let appPath = path.join(process.mainModule.filename, '..');
-    let filePath = path.join(appPath, staticBase, _path);
-
+    let filePath = path.join(appPath, staticBase, _path).replace(/\?.+$/,'');
+    // console.log(filePath)
     fs.stat(filePath, function(err, state) {
         if (state) {
             let extend = filePath.match(/\.\w+$/)[0];
             let mimeStr = mime[extend];
-            if(!mimeStr){
+            if (!mimeStr) {
                 httpResponse.res404(request, response);
                 return false;
             }
