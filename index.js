@@ -18,6 +18,11 @@ class M {
             middle.add.call(this, obj);
         }
     }
+
+    get(path, file) {
+        this.routerGet = this.routerGet || [];
+        this.routerGet.push([path, file])
+    } 
 }
 
 module.exports = M;

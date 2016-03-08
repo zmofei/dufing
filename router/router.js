@@ -15,6 +15,7 @@ let routerCache = {};
 function Router(request, response) {
     var reqUrl = url.parse(request.url);
     var reqPath = reqUrl.path;
+
     if (/\.\w+/.test(reqPath)) {
         // if is static
         staticRouter(request, response, reqPath);

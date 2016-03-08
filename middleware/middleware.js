@@ -1,6 +1,6 @@
 'use strict';
 
-let middleware = ['dufing-jade'];
+let middleware = ['dufing-jade',''];
 
 let args = {};
 
@@ -18,7 +18,6 @@ class Middle {
         let name = 'dufing-' + obj.name;
         if (middleware.indexOf(name) == -1) {
             // thrid part middleware
-
         } else {
             // defaule middleware
             let middle = require('./' + name + '.js');

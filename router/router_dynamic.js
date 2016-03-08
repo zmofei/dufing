@@ -13,17 +13,33 @@ function Dynamic(request, response, _path) {
     self.req = request;
     self.res = response;
     let appPath = path.join(process.mainModule.filename, '..');
-    let filePath = path.join(appPath, rootBase, _path).replace(/\?.*$/, '');
-    // console.log(filePath)
 
-    if (routerCache[_path]) {
+    var usePath = _path.replace(/\?.*$/, '');
+
+    // customer router
+    for (var i in this.routerGet) {
+        var reg = new RegExp(this.routerGet[i][0]);
+        var match = usePath.match(reg);
+        if (match) {
+            usePath = this.routerGet[i][1];
+            self.reqParam = match;
+            break;
+        }
+    }
+
+    var method = self.req.method.toLowerCase();
+    var cacheName = _path + '_' + method;
+
+    if (routerCache[cacheName]) {
         middle.regArgs({
             router: {
-                path: routerCache[_path].path
+                path: routerCache[cacheName].path
             }
         });
-        routerCache[_path].fn.call(self, request, response)
+        routerCache[cacheName].fn.call(self, request, response)
     } else {
+        let filePath = path.join(appPath, rootBase, usePath);
+
         let paths = [];
         // if the path not end with '\ ',
         // that's mean it colod be a folder or file
@@ -35,10 +51,11 @@ function Dynamic(request, response, _path) {
         paths.push(path.join(filePath, 'index.js'));
 
         readDynamic(paths, function(_module, filePath) {
+            var methodFunction = _module[method];
             // success
-            if (typeof(_module) == 'function') {
-                routerCache[_path] = {
-                    'fn': _module,
+            if (typeof(methodFunction) == 'function') {
+                routerCache[cacheName] = {
+                    'fn': methodFunction,
                     'path': filePath
                 };
                 middle.regArgs({
@@ -46,7 +63,7 @@ function Dynamic(request, response, _path) {
                         path: filePath
                     }
                 });
-                _module.call(self, request, response)
+                methodFunction.call(self, request, response)
             } else {
                 httpResponse.res404(request, response);
             }
