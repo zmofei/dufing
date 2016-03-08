@@ -7,6 +7,12 @@ class M {
     constructor(obj) {
         const port = obj.port || 8124;
         server.call(this, port);
+        
+        // loader default middleware
+        this.use({
+            response: {},
+            jade: {},
+        })
     }
 
     use(middles) {
