@@ -1,6 +1,6 @@
 'use strict';
 
-let middleware = ['dufing-jade',''];
+let middleware = ['dufing-jade', 'dufing-response'];
 
 let args = {};
 
@@ -15,6 +15,7 @@ class Middle {
 
     add(obj) {
         var self = this;
+
         let name = 'dufing-' + obj.name;
         if (middleware.indexOf(name) == -1) {
             // thrid part middleware

@@ -19,10 +19,11 @@ class M {
         }
     }
 
+    // customer router
     get(path, file) {
         this.routerGet = this.routerGet || [];
         this.routerGet.push([path, file])
-    } 
+    }
 }
 
 module.exports = M;

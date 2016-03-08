@@ -28,7 +28,6 @@ function Static(request, response, _path) {
                 // the default expores time is one year
                 now.setFullYear(now.getFullYear() + 1);
                 var expires = now.toGMTString();
-                console.log(mimeStr)
                 var headData = {
                     'Content-Type': mimeStr + '; charset=utf-8',
                     'Version': 'HTTP/1.1',

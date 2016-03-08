@@ -3,8 +3,6 @@
 const http = require('http');
 const router = require('../router/router');
 const middle = require('../middleware/middleware');
-// console.log(router);
-
 
 const process = require('process');
 
