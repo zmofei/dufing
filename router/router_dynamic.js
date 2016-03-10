@@ -17,8 +17,11 @@ function Dynamic(request, response, _path) {
     var usePath = _path.replace(/\?.*$/, '');
 
     // customer router
+    // console.log(usePath, this.routerGet)
+    self.reqParam = null;
     for (var i in this.routerGet) {
         var reg = new RegExp(this.routerGet[i][0]);
+
         var match = usePath.match(reg);
         if (match) {
             usePath = this.routerGet[i][1];
