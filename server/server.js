@@ -4,8 +4,6 @@ const http = require('http');
 const router = require('../router/router');
 const middle = require('../middleware/middleware');
 
-const process = require('process');
-
 var url = require('url');
 
 function server(port) {

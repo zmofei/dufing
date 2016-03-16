@@ -1,6 +1,6 @@
 'use strict';
 
-let middleware = ['dufing-jade', 'dufing-response'];
+let middleware = ['dufing-jade', 'dufing-response', 'dufing-session'];
 
 let args = {};
 
@@ -23,9 +23,7 @@ class Middle {
             // defaule middleware
             let middle = require('./' + name + '.js');
             for (var i in middle) {
-                this[i] = function() {
-                    middle[i].apply(args, arguments);
-                }
+                self[i] = new middle[i](args);
             }
         }
     }

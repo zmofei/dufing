@@ -1,16 +1,12 @@
 'use strict'
 
 const url = require('url');
-const process = require('process');
 const dynamicRouter = require('./router_dynamic');
 const staticRouter = require('./router_static');
-
 
 const rootBase = 'root';
 
 let routerCache = {};
-
-
 
 function Router(request, response) {
     var reqUrl = url.parse(request.url);

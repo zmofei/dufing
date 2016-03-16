@@ -1,8 +1,16 @@
 'use strict';
 
-exports.json = function(obj) {
-    let self = this;
-    let json = JSON.stringify(obj);
-    self.res.writeHead(200, { "Content-Type": "application/json" });
-    self.res.end(json);
+class Response {
+    constructor(args) {
+        this.proto = args;
+    }
+
+    json(obj) {
+        let self = this.proto;
+        let json = JSON.stringify(obj);
+        self.res.writeHead(200, { "Content-Type": "application/json" });
+        self.res.end(json);
+    }
 }
+
+exports.response = Response;

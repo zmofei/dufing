@@ -3,15 +3,16 @@
 const server = require('./server/server');
 const middle = require('./middleware/middleware');
 
-class M {
+class Dufing {
     constructor(obj) {
         const port = obj.port || 8124;
         server.call(this, port);
-        
+
         // loader default middleware
         this.use({
             response: {},
             jade: {},
+            // session: {},
         })
     }
 
@@ -32,4 +33,4 @@ class M {
     }
 }
 
-module.exports = M;
+module.exports = Dufing;
