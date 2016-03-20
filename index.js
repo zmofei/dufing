@@ -12,7 +12,7 @@ class Dufing {
         this.use({
             response: {},
             jade: {},
-            // session: {},
+            session: {},
         })
     }
 
