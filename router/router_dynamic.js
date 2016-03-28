@@ -12,7 +12,8 @@ function Dynamic(request, response, _path) {
     let self = this;
     self.req = request;
     self.res = response;
-    let appPath = path.join(process.mainModule.filename, '..');
+    // let appPath = path.join(process.mainModule.filename, '..');
+    let appPath = process.env.PWD;
 
     var usePath = _path.replace(/\?.*$/, '');
 

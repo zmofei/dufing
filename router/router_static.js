@@ -8,8 +8,9 @@ const staticBase = 'static';
 
 function Static(request, response, _path) {
 
-    let appPath = path.join(process.mainModule.filename, '..');
-    let filePath = path.join(appPath, staticBase, _path).replace(/\?.+$/,'');
+    // let appPath = path.join(process.mainModule.filename, '..');
+    let appPath = process.env.PWD;
+    let filePath = path.join(appPath, staticBase, _path).replace(/\?.+$/, '');
     // console.log(filePath)
     fs.stat(filePath, function(err, state) {
         if (state) {
