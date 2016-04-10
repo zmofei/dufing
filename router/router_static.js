@@ -1,13 +1,11 @@
 'use strict';
 
-const httpResponse = require('../http/http_response');
 const mime = require('./router_mime');
 const fs = require('fs');
 const path = require('path');
 const staticBase = 'static';
 
 function Static(request, response, _path) {
-
     // let appPath = path.join(process.mainModule.filename, '..');
     let appPath = process.env.PWD;
     let filePath = path.join(appPath, staticBase, _path).replace(/\?.+$/, '');
@@ -17,13 +15,19 @@ function Static(request, response, _path) {
             let extend = filePath.match(/\.\w+$/)[0];
             let mimeStr = mime[extend];
             if (!mimeStr) {
-                httpResponse.res404(request, response);
+                response.writeHead(404, {
+                    'Content-Type': 'text/html; charset=UTF-8'
+                });
+                response.end('404 Not Found');
                 return false;
             }
             var mtime = state.mtime.toGMTString();
             if (mtime == request.headers['if-modified-since']) {
                 // if the file is cached
-                httpResponse.res304(request, response);
+                response.writeHead(304, {
+                    'Content-Type': 'text/html; charset=UTF-8'
+                });
+                response.end('304 Not Modified');
             } else {
                 var now = new Date();
                 // the default expores time is one year
@@ -61,7 +65,10 @@ function Static(request, response, _path) {
                 });
             }
         } else {
-            httpResponse.res404(request, response);
+            response.writeHead(404, {
+                'Content-Type': 'text/html; charset=UTF-8'
+            });
+            response.end('404 Not Found');
         }
     })
 }

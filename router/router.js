@@ -14,7 +14,7 @@ function Router(request, response) {
 
     if (/\.\w+/.test(reqPath)) {
         // if is static
-        staticRouter(request, response, reqPath);
+        staticRouter.call(this, request, response, reqPath);
     } else {
         // if is dynamic
         dynamicRouter.call(this, request, response, reqPath);
