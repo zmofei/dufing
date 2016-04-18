@@ -69,11 +69,20 @@ function Dynamic(request, response, _path) {
                 });
                 methodFunction.call(self, request, response)
             } else {
-                httpResponse.res404(request, response);
+                self.res.writeHead(404, {
+                    'Content-Type': 'text/html; charset=UTF-8'
+                });
+                self.res.end('404 Not Found');
+
+                // httpResponse.res404(request, response);
             }
         }, function() {
             // file
-            httpResponse.res404(request, response);
+            // httpResponse.res404(request, response);
+            self.res.writeHead(404, {
+                'Content-Type': 'text/html; charset=UTF-8'
+            });
+            self.res.end('404 Not Found');
         });
     }
 }

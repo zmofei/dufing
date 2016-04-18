@@ -31,7 +31,10 @@ class Jade {
                 self.res.writeHead(200, header);
                 self.res.end(html);
             } else {
-                httpResponse.res404(self.req, self.res);
+                self.res.writeHead(404, {
+                    'Content-Type': 'text/html'
+                });
+                self.res.end('404 Not Found - [dufing-jade]');
             }
         });
     }
