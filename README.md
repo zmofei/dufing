@@ -2,11 +2,12 @@
 
 --------------------------------------------------------------------------------
 
+Dufing 是一个基于文件系统的Node.js webserver, 他可以自动根据文件结构读取router文件，同时支持第三方middleware。
+
 ## 文档
 
 [中文文档](http://zmofei.github.io/dufing/)
 
-Dufing 是一个基于文件系统的Node.js webserver, 他可以自动根据文件结构读取router文件，同时支持第三方middleware。
 
 ## 安装
 
