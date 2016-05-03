@@ -6,7 +6,7 @@ Dufing 是一个基于文件系统的Node.js webserver, 他可以自动根据文
 
 ## 文档
 
-[中文文档](http://zmofei.github.io/dufing/)
+[中文文档](https://zmofei.gitbooks.io/dufing/content/)
 
 
 ## 安装
