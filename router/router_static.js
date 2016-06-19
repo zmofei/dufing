@@ -11,8 +11,9 @@ function Static(request, response, _path) {
     let filePath = path.join(appPath, staticBase, _path).replace(/\?.+$/, '');
     // console.log(filePath)
     fs.stat(filePath, function(err, state) {
-        if (state) {
-            let extend = filePath.match(/\.\w+$/)[0];
+        let hasExtend = filePath.match(/\.\w+$/);
+        if (state && hasExtend) {
+            let extend = hasExtend[0];
             let mimeStr = mime[extend];
             if (!mimeStr) {
                 response.writeHead(404, {
