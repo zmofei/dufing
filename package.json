@@ -1,24 +1,38 @@
 {
-  "name": "msite",
-  "version": "0.0.2",
-  "description": "The faster way built your website with node.js",
-  "main": "app.js",
-  "dependencies": {
-    "jade": "^1.3.1"
+  "name": "dufing",
+  "version": "1.0.12",
+  "description": "The folder based webserver for node",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zmofei/dufing.git"
   },
   "keywords": [
-    "website",
-    "nodejs"
+    "webserver",
+    "node.js"
   ],
   "author": {
-    "name": "ZMofei",
+    "name": "Mofei Zhu",
     "email": "13761509829@163.com"
   },
-  "engines": {
-    "node": ">= 0.10.26"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zmofei/dufing/issues"
   },
-  "readme": "mSite\n=====\n\nmBlog is rename to mSite\n\nThe faster way built your website with node.js\n\n```javascript\nvar app = require('msite');\n\napp.start('9999');\n```\n\n\nStatic files\n=====\n\nall the static files (*.*) are in the folder `/static`\n\neg: `127.0.0.1:9999/test.js` => `/static/test.js`\n\n\n#### MIME\nthe default MIME is:\n\n``` javascript\nMIME = {\n  'css' : 'text/css',\n  'js' : 'text/javascript',\n  'gif' : 'image/gif',\n  'jpg' : 'image/jpeg',\n  'png' : 'image/png',\n  'ico' : 'image/x-icon',\n  'html' : 'text/html',\n  'htm' : 'text/html',\n  'txt' : 'text/plain',\n  'mp4' : 'video/mp4'\n};\n```\n\nif you want add or remove some MIME,you can simple use:\n\nadd .exe file support\n`app.mime.add({\"exe\":\"plan/application\"})`\n\nremove .css file support\n`app.mime.remove(\"css\")`  \n\nremove .css and .javascript file support\n`app.mime.remove(\"css,javascript\")`  \n\nDynamic url\n=====\n\nif access a dynamic url (not end with *.*);\n\nfor example,if you visite a url `name.com/abc/dd`\n\nmsite first try to read `/abc/dd.js` file,if the file is exists , run this file,if it's not exists,msite will try to read `/abc/dd.jade`,if it's also not exists ,msite will try to put dd as a folder and try to readen `/abc/dd/index.js` | `/abc/dd/index.jade`,if msite sitll got nothing,it return 404\n\n\n> `name.com/abc/dd` => `/abc/dd.js` | `/abc/dd.jade`\n\n> `name.com/abc/dd` => `/abc/dd/index.js` | `/abc/dd/index.jade`\n\n##HTML Templpate\n\nIn msite we use Jade to readen html,it's easy and simple\n\n[Jade language Reference](http://jade-lang.com/reference/#casefallthrough)\n\nyou also can use jade's layout to finish you pages\n\n\n##Router Rules\n\n### get(RegExp,folder)\nsometimes we don't want visit as a filesystem.\nfor example you want the following address\n`name.com/blog/1235`\nto readen\n`/blog/index.jade` and the model `/blog/index.js`\nin this case you can use the method `get`\n\n`name.com/blog/1235` => `/blog/index.jade` & `/blog/index.js`\n\n```javascript\nvar app = require('msite');\n\n//the router\napp.get(/\\/blog\\/(\\d{4})$/, 'blog');\n//if the url match the /\\/blog\\/(\\d{4})$/,\n//msite will try to readen the index.jade and index.js in folder /blog\n\napp.start('9999');\n```\n\n### get(RegExp,files#)\n\nand in outher case, we didn't what to readen `index.jade` and `index.js`,say we want to readen `/blog/list.jade` and `/blog/list.js` , you can use \"#\".\n\n`name.com/blog/asd2asd2asd2asd2asd2asd2` => `blog/list.jade` & `blog/list.js`\n\n```javascript\nvar app = require('msite');\n\n//the router\napp.get(/\\/blog\\/(\\w{24})$/, 'blog/list#');\n//if the url match the /\\/blog\\/(\\d{24})$/,\n//msite will try to readen the list.jad and list.js in folder /blog\n\napp.start('9999');\n\n```\n",
+  "homepage": "https://github.com/zmofei/dufing#readme",
+  "dependencies": {
+    "jade": "^1.11.0"
+  },
+  "readme": "# Dufing - A folder system based Node.js webserver\n\n--------------------------------------------------------------------------------\n\nDufing 是一个基于文件系统的Node.js webserver, 他可以自动根据文件结构读取router文件，同时支持第三方middleware。\n\n## 安装\n\n```\nnpm install --save dufing\n```\n\n## 快速上手\n\n#### 1. app.js\n\n```JavaScript\n/**\n * app.js\n * 使用dufing只需简单的require，然后实例化即可\n */\n\n'use strict';\n\nlet Dufing = require('dufing');\n\nlet site = new Dufing({\n    // 指定端口 默认端口是8124\n    port: 8333\n});\n```\n\n#### 2. root/index.js\n\n```JavaScript\n/**\n * root/index.js\n * 默认情况下 root 为代码的根目录\n * 访问 127.0.0.1:8333/ 系统会自动的查找 `root/index.js`\n * 具体的路由规则，详见路由模块的介绍\n */\n\nvar render = function() {\n    // this.req 相当于请求的request\n    // this.res 相当于请求的response\n    this.res.writeHead(200, {\n        'Content-Type': 'text/plain'\n    });\n    this.res.end('welcome to dufing');\n}\n\n// module.exports 将需要执行的代码块抛给dufing处理\nmodule.exports = render;\n```\n\n#### 3. static/\\*.\\*\n\n默认情况下，static为静态资源目录，所有符合规则的静态资源都会被直接读取到。\n\n比如访问\n\n`http://hostname/test.js` 系统会尝试访问 `static/test.js` 如果不存在返回404\n\n## 示例\n[朱文龙的自留地](http://www.zhuwenlong.com) ([代码](https://github.com/zmofei/myblog))\n",
   "readmeFilename": "README.md",
-  "_id": "msite@0.0.0",
-  "_from": "msite@^0.0.0"
+  "gitHead": "74148369bafe4292ce298142f636ec56ea9d1843",
+  "_id": "dufing@1.0.7",
+  "_shasum": "18d2cc347dfc6ac6904195af42e48305fbc0b602",
+  "_from": "dufing@>=1.0.1 <2.0.0"
 }
