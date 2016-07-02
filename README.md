@@ -1,4 +1,4 @@
-mSite is renamed to [dufing](https://github.com/zmofei/dufing)`
+mSite is renamed to [dufing](https://github.com/zmofei/dufing)
 
 ------
 
