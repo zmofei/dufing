@@ -1,5 +1,4 @@
-mSite is renamed to [dufing](https://github.com/zmofei/dufing)
-
+`!!! mSite is renamed to [dufing](https://github.com/zmofei/dufing)`
 
 our website is [mSite](http://msite.zhuwenlong.com) (only Chinese,Engling is in progressing)
 
