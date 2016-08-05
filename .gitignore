@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 normalize.sass
 node_modules
 .sass-cache
@@ -9,3 +10,6 @@ static/upload/
 bower_components
 build
 .DS_Store
+=======
+node_models
+>>>>>>> ae4eb6b94fe57647b5266349b48f396603b6c1d1
