@@ -13,6 +13,7 @@ class Dufing {
             response: {},
             jade: {},
             session: {},
+            hbs:{}
         })
     }
 

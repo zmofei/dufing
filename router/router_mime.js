@@ -47,7 +47,6 @@ let mime = {
     ".sgml": "text/sgml",
     ".sit": "application/x-stuffit",
     ".sldx": "application/vnd.openxmlformats-officedocument.presentationml.slide",
-    ".svg": "image/svg+xml",
     ".swf": "application/x-shockwave-flash",
     ".tar.gz": "application/x-tar",
     ".tgz": "application/x-tar",

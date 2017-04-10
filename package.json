@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/zmofei/dufing#readme",
   "dependencies": {
+    "handlebars-layouts": "^3.1.4",
+    "hbs": "^4.0.1",
     "jade": "^1.11.0"
   },
   "readme": "# Dufing - A folder system based Node.js webserver\n\n--------------------------------------------------------------------------------\n\nDufing 是一个基于文件系统的Node.js webserver, 他可以自动根据文件结构读取router文件，同时支持第三方middleware。\n\n## 安装\n\n```\nnpm install --save dufing\n```\n\n## 快速上手\n\n#### 1. app.js\n\n```JavaScript\n/**\n * app.js\n * 使用dufing只需简单的require，然后实例化即可\n */\n\n'use strict';\n\nlet Dufing = require('dufing');\n\nlet site = new Dufing({\n    // 指定端口 默认端口是8124\n    port: 8333\n});\n```\n\n#### 2. root/index.js\n\n```JavaScript\n/**\n * root/index.js\n * 默认情况下 root 为代码的根目录\n * 访问 127.0.0.1:8333/ 系统会自动的查找 `root/index.js`\n * 具体的路由规则，详见路由模块的介绍\n */\n\nvar render = function() {\n    // this.req 相当于请求的request\n    // this.res 相当于请求的response\n    this.res.writeHead(200, {\n        'Content-Type': 'text/plain'\n    });\n    this.res.end('welcome to dufing');\n}\n\n// module.exports 将需要执行的代码块抛给dufing处理\nmodule.exports = render;\n```\n\n#### 3. static/\\*.\\*\n\n默认情况下，static为静态资源目录，所有符合规则的静态资源都会被直接读取到。\n\n比如访问\n\n`http://hostname/test.js` 系统会尝试访问 `static/test.js` 如果不存在返回404\n\n## 示例\n[朱文龙的自留地](http://www.zhuwenlong.com) ([代码](https://github.com/zmofei/myblog))\n",
