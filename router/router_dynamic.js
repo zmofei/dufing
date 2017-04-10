@@ -13,8 +13,8 @@ function Dynamic(request, response, _path) {
     self.req = request;
     self.res = response;
     // let appPath = path.join(process.mainModule.filename, '..');
-    let appPath = process.env.PWD;
-
+    //let appPath = process.env.PWD;
+    let appPath = process.env.PWD || path.join(process.mainModule.filename, '..');
     var usePath = _path.replace(/\?.*$/, '');
 
     // customer router
