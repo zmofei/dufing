@@ -4,7 +4,6 @@
 'use strict';
 
 const hbs = require('hbs');
-const paths = require('path');
 const fs = require('fs');
 const layouts = require('handlebars-layouts');
 const httpResponse = require('../http/http_response');
@@ -37,14 +36,14 @@ class Hbs {
 
     let path = _obj.path ? _obj.path + '/' + filePath + self.exname:self.router.path.replace(/\.\w+$/, self.exname);
     let layoutPath ;
-    let __path = path;
+    let _path = path;
 
     fs.stat(path, function(err, stats) {
       if (stats) {
         //如果有默认布局，就加载布局走
         if(_obj.layout){
           path = _obj.path + '/' + _obj.layout +  self.exname;
-          layoutPath = __path;
+          layoutPath = _path;
           hbs.registerPartial('body', fs.readFileSync(layoutPath, 'utf8'));
         }
         // Compile template
