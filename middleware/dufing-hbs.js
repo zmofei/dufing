@@ -15,8 +15,6 @@ class Hbs {
     this.proto = args;
   }
   use(obj){
-    //console.log(obj)
-    //return;
     let self = this.proto;
     let _obj = obj || {};
     let viewPath = _obj.viewPath || '';
@@ -32,8 +30,8 @@ class Hbs {
     //self.viewPath = viewPath;
     //self.adminViewPath = adminViewPath;
     return self
-  };
-  
+  }
+
   render(filePath,_obj) {
     let obj = _obj || {};
     let self = this.proto;
