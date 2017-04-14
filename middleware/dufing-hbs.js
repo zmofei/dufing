@@ -32,8 +32,8 @@ class Hbs {
     //self.viewPath = viewPath;
     //self.adminViewPath = adminViewPath;
     return self
-  }
-
+  };
+  
   render(filePath,_obj) {
     let obj = _obj || {};
     let self = this.proto;
