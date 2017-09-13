@@ -13,8 +13,9 @@ class Jade {
     render(_obj) {
         let obj = _obj || {};
         let self = this.proto;
-        let path = self.router.path.replace(/\.\w+$/, '.jade');
-        fs.stat(path, function(err, stats) {
+        let path = obj.path || self.router.path.replace(/\.\w+$/, '.jade');
+        console.log('xxxxx', obj.path )
+        fs.stat(path, function (err, stats) {
             if (stats) {
                 let fn = jade.compileFile(path);
                 let html = fn(obj.data);
